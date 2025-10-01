@@ -1,17 +1,11 @@
 import cls from "./Button.module.css";
 
-// const styleColor = {
-//   color: "yellow",
-//   backgroundColor: "#ccc",
-// };
-
-const isPrimary = true;
-
-export const Button = ({ onClick, children }) => {
+export const Button = ({ onClick, isActive, isDisabled, children }) => {
   return (
     <button
-      className={`${cls.btn} ${isPrimary ? cls.primary : ""}`}
+      className={`${cls.btn} ${isActive ? cls.active : ""}`}
       onClick={onClick}
+      disabled={isDisabled}
     >
       {children}
     </button>
