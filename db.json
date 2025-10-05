@@ -27,7 +27,7 @@
       "description": "React поддерживает концепцию Virtual DOM — это представление реального DOM в памяти. Когда состояние компонента изменяется, React сравнивает Virtual DOM с предыдущим состоянием и обновляет только измененные элементы на странице.",
       "resources": ["https://react.dev/learn/render-and-commit"],
       "level": 2,
-      "completed": false,
+      "completed": true,
       "editDate": "03.02.2025, 19:01"
     },
     {
