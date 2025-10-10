@@ -11,12 +11,13 @@ const DEFAULT_PER_PAGE = 10;
 
 export const HomePage = () => {
   const [searchParams, setSearchParams] = useState(
+    //параметры для API запроса (пагинация, сортировка)
     `?_page=1&_per_page=${DEFAULT_PER_PAGE}`
   );
-  const [questions, setQuestions] = useState({});
-  const [searchValue, setSearchValue] = useState("");
-  const [sortSelectValue, setSortSelectValue] = useState("");
-  const [countSelectValue, setCountSelectValue] = useState("");
+  const [questions, setQuestions] = useState({}); //данные вопросов от сервера
+  const [searchValue, setSearchValue] = useState(""); //значение поискового поля
+  const [sortSelectValue, setSortSelectValue] = useState(""); //выбранная сортировка
+  const [countSelectValue, setCountSelectValue] = useState(""); // количество элементов на странице
 
   const controlsContainerRef = useRef("");
 
