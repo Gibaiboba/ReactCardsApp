@@ -6,6 +6,8 @@ import { delayFn } from "../../helpers/DelayFn";
 import { API_URL } from "../../constans";
 import { toast } from "react-toastify";
 import { dateFormat } from "../../helpers/DateFormat";
+import { useFetch } from "../../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 const editCardAction = async (_prevState, formData) => {
   try {
@@ -44,21 +46,44 @@ const editCardAction = async (_prevState, formData) => {
 };
 
 export const EditQuestion = ({ initialState = {} }) => {
+  const navigate = useNavigate();
   const [formState, formAction, isPading] = useActionState(editCardAction, {
     ...initialState,
     clearForm: false,
   });
 
+  const [removeQuestion, isQuestionRemoving] = useFetch(async () => {
+    await fetch(`${API_URL}/react/${initialState.id}`, {
+      method: "DELETE",
+    });
+
+    toast.success("The question has been successfully removed");
+    navigate("/");
+  });
+
+  const onRemoveQuestionHandler = () => {
+    const isRemove = confirm("Are you sure?");
+    isRemove && removeQuestion();
+  };
+
   return (
     <>
-      {isPading && <Loader />}
+      {(isPading || isQuestionRemoving) && <Loader />}
       <h1 className={cls.formTitle}>Edit question</h1>
 
       <div className={cls.formContainer}>
+        <button
+          className={cls.removeBtn}
+          disabled={isPading || isQuestionRemoving}
+          onClick={onRemoveQuestionHandler}
+        >
+          x
+        </button>
+
         <QuestionForm
           formAction={formAction}
           state={formState}
-          isPading={isPading}
+          isPading={isPading || isQuestionRemoving}
           submitBtnText="Edit Question"
         />
       </div>
