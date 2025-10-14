@@ -6,22 +6,12 @@ import { useState, useId, useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { API_URL } from "../../constans";
 import { Loader, SmallLoader } from "../../components/Loader";
-
-const card = {
-  id: "2",
-  question: "Что такое JSX?",
-  answer: "JSX — это синтаксическое расширение JavaScript для React.",
-  description:
-    "JSX позволяет писать HTML-подобный код в JavaScript, который затем транспилируется в вызовы `React.createElement`. Он облегчает создание и визуальное представление структуры компонентов.",
-  resources: ["https://react.dev/learn/writing-markup-with-jsx"],
-  level: 2,
-  completed: false,
-  editDate: "03.02.2025, 20:25",
-};
+import { useAuth } from "../../hooks/useAuth";
 
 export const QuestionPage = () => {
   const checkboxId = useId();
   const navigate = useNavigate();
+  const { isAuth } = useAuth();
   const { id } = useParams();
   const [card, setCard] = useState(null);
   const [isChecked, setIsChecked] = useState(true);
@@ -110,12 +100,14 @@ export const QuestionPage = () => {
             {isCardUpdating && <SmallLoader />}
           </label>
 
-          <Button
-            onClick={() => navigate(`/editquestion/${card.id}`)}
-            isDisabled={isCardUpdating}
-          >
-            Edit Question
-          </Button>
+          {isAuth && (
+            <Button
+              onClick={() => navigate(`/editquestion/${card.id}`)}
+              isDisabled={isCardUpdating}
+            >
+              Edit Question
+            </Button>
+          )}
           <Button onClick={() => navigate("/")} isDisabled={isCardUpdating}>
             Back
           </Button>
