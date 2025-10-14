@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Loader } from "../../components/Loader";
 import { EditQuestion } from "./EditQuestion";
 
-export const EditQuestionPage = () => {
+const EditQuestionPage = () => {
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
 
@@ -26,3 +26,5 @@ export const EditQuestionPage = () => {
     </>
   );
 };
+
+export default EditQuestionPage;
