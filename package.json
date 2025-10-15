@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server --watch db.json -p 8801",
+    "server": "json-server --watch db.json -p 8802",
     "server:help": "json-server --help",
     "start:app": "concurrently \"npm run server\" \"npm run dev\""
   },
